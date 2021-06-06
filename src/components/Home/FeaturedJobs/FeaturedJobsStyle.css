@@ -1,0 +1,44 @@
+.feat-jobs-body {
+  background-color: #f0f0f0;
+}
+
+.jobs-heading {
+  display: block;
+  margin: 0px auto;
+}
+
+.feat-jobs-card {
+  border: none;
+}
+
+.feat-jobs-0 {
+  background-color: #fbfbfb;
+  --bs-gutter-x: 0px;
+}
+
+.feat-jobs-0:hover {
+  background-color: #fef291;
+}
+
+.feat-jobs-1 {
+  --bs-gutter-x: 0px;
+}
+
+.feat-jobs-1:hover {
+  background-color: #fef291;
+}
+
+.company-logo {
+  position: relative;
+}
+
+.company-logo img {
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  max-width: 80px;
+}
+
+.job-details ul li {
+  list-style: none;
+}

@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import { BrowserRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { getKeywords } from './actions/trendKeywords'
+import { getFeaturedComapnies } from './actions/featuredCompanies'
+import { getFeaturedJobs } from './actions/featuredJobs'
+import Home from './components/Home/Home';
+import Topbar from './components/Topbar/Topbar'
+
+
+const App = () => {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getKeywords())
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(getFeaturedJobs())
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(getFeaturedComapnies())
+    }, [dispatch])
+    
+    return (
+        <BrowserRouter>
+            <div>
+                <Topbar />
+                <Home />
+            </div>
+        </BrowserRouter>
+        
+    )
 }
 
-export default App;
+export default App
