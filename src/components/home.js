@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import {Helmet} from "react-helmet"
+import FeaturedCompanies from './FeaturedCompanies';
 import "./home.css"
 
 const home=(props)=>{
@@ -146,7 +147,7 @@ const home=(props)=>{
                         
                         <div class="banner-search">
                             <form action="https://jobxprss.com/index.html" id="search-form" class="search-form" method="" novalidate="novalidate" autocomplete="off"><input type="hidden" name="csrfmiddlewaretoken" value="fPn2UFF9jSOMJKUerx3nwW7Qm7H15apiW8kOvHX7ikVOarc1YcOd1qFW0lMvUngN"/>
-                                <div class="input-group">
+                                <div class="input-group search-bar">
                                 <input type="text" name="keyword" id="keyword" placeholder="Enter Keywords"/>
                                 <button class="button jxhome-search-btn primary-bg search-btn"><i class="fas fa-search text-dark" style={{color:"#ffffff"}}></i><span></span></button>
                                 </div>
@@ -412,7 +413,7 @@ const home=(props)=>{
         </div>
     </div>
 
-    <div class="top-companies-wrapper" >
+    {/* <div class="top-companies-wrapper" >
         <div class="container" id="featured-companies">
             <div class="row">
                 <div class="col">
@@ -423,6 +424,9 @@ const home=(props)=>{
                 </div>
             </div>
         </div>
+    </div> */}
+    <div class="top-companies-wrapper" >
+        <FeaturedCompanies />
     </div>
 
     <div class="padding-bottom-90 career-advice-wrapper ash-background">

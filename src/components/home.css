@@ -1,129 +1,134 @@
-        .recent-job .section-header.section-header-2 {
-            padding-top: 72px;
-        }
-        .recent-job .section-header {
-            margin-bottom: 35px;
-        }
-        .explore-job {
-            background: #fff;
-            border-radius: 10px;
+.recent-job .section-header.section-header-2 {
+  padding-top: 72px;
+}
+.recent-job .section-header {
+  margin-bottom: 35px;
+}
+.explore-job {
+  background: #fff;
+  border-radius: 10px;
+}
 
-        }
+.explore-job-wrapper .section-header p {
+  margin-top: 20px;
+}
+.recent-bottom-border {
+  width: 100px;
+  display: block;
+  border: 2px solid #f5d91d;
+  height: 2px;
+}
+.browse-all-padding {
+  padding-bottom: 82px;
+  padding-top: 82px;
+}
+.browse-all-btn {
+  padding: 6px 20px;
+  font-weight: 500;
+}
+.vital-stats {
+  background-image: url("https://d1fagfwe7y4ow4.cloudfront.net//images/yellow/bg_vital_stats.jpg");
+}
+.fact .fact-name {
+  color: #f5d91d;
+  font-size: 3rem;
+}
+.fact .fact-number {
+  font-family: "Arial";
+  font-size: 72px;
+  font-weight: bold;
+}
+.bg-vital-stats {
+  background: rgba(0, 0, 0, 0.5);
+}
+.explore-job-header-border {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+  border: 0;
+  border-top: 1px solid #f5d91d;
+  width: 50%;
+  margin-left: 28px;
+}
+.explore-job .explore-job-header {
+  border: 0px;
+}
+.banner-4 .banner-content .banner-search {
+  border-radius: 0 0 30px 30px;
+}
+.banner-4 .banner-content .banner-search .search-form input {
+  margin-right: 0;
+}
+.banner-4 .banner-content .banner-search .trending-key {
+  margin-left: 16px;
+}
+.banner-search button {
+  padding: 0 !important;
+}
 
-        .explore-job-wrapper .section-header p {
-            margin-top: 20px;
-        }
-        .recent-bottom-border {
-            width: 100px;
-            display: block;
-            border: 2px solid #f5d91d;
-            height: 2px;
-        }
-        .browse-all-padding{
-            padding-bottom: 82px;
-            padding-top: 82px;
-        }
-        .browse-all-btn{
-            padding: 6px 20px;
-            font-weight: 500;
-        }
-        .vital-stats{
-            background-image: url("https://d1fagfwe7y4ow4.cloudfront.net//images/yellow/bg_vital_stats.jpg");
-        }
-        .fact .fact-name{
-            color: #f5d91d;
-            font-size: 3rem;
-        }
-        .fact .fact-number{
-            font-family: "Arial";
-            font-size: 72px;
-            font-weight: bold;
-        }
-        .bg-vital-stats{
-            background: rgba(0,0,0,0.5);
-        }
-        .explore-job-header-border {
-            margin-top: 0rem;
-            margin-bottom: 0rem;
-            border: 0;
-            border-top: 1px solid #f5d91d;
-            width: 50%;
-            margin-left: 28px;
-        }
-        .explore-job .explore-job-header {
-            border: 0px;
-        }
-        .banner-4 .banner-content .banner-search {
-            border-radius: 0 0 30px 30px;
-        }
-        .banner-4 .banner-content .banner-search .search-form input {
-            margin-right: 0;
-        }
-        .banner-4 .banner-content .banner-search .trending-key {
-            margin-left: 16px;
-        }
-        .banner-search button{
-            padding: 0!important;
-        }
-        .featured-company-list{
-            background-color: #ffffff;
-            border: 1px solid rgb(0, 0, 0, 0.08);
-        }
-        .margin-top-bottom-3rem {
-            margin-bottom: 3rem;
-            margin-top: 3rem;
-        }
-        .margin-top-bottom-3rem:last-child {
-            margin-bottom: 0;
-        }
-        .top-companies-wrapper {
-            padding-bottom: 80px;
-        }
-        .career-advice-wrapper {
-            padding-top: 80px;
-        }
-        .career-advice-wrapper h2.mb-4 {
-            padding-bottom: 10px;
-        }
-        .career-advice-wrapper .section-header {
-            margin-bottom: 35px;
-        }
-        #trend-keywords span+span::before {
-            content: "|";
-            font-style: normal;
-        }
+.featured-company-list {
+  background-color: #ffffff;
+  border: 1px solid rgb(0, 0, 0, 0.08);
+}
+.margin-top-bottom-3rem {
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+.margin-top-bottom-3rem:last-child {
+  margin-bottom: 0;
+}
+.top-companies-wrapper {
+  padding-bottom: 80px;
+}
+.career-advice-wrapper {
+  padding-top: 80px;
+}
+.career-advice-wrapper h2.mb-4 {
+  padding-bottom: 10px;
+}
+.career-advice-wrapper .section-header {
+  margin-bottom: 35px;
+}
+#trend-keywords span + span::before {
+  content: "|";
+  font-style: normal;
+}
 
-        .job-list .body .more .buttons .favourite.active svg {
-            fill: #f5d91d;
-        }
-        #apply_now{
-            border: 1px solid rgba(0, 0, 0, 0.08);
-        }
-        button#apply_now:hover{
-            border:1px solid #f5d91d !important;
-        }
-        .navbar-collapse{
-            top:100% !important; ;
-        }
-        a[disabled], a[disabled]:hover {
-            pointer-events: none;
-            background-color: #FFF!important;
-        }
-        .header-other{
-           background:none !important;
-        }
-        .alice-bg{
-            background:none !important;
-            box-shadow:none !important;
-            }
+.job-list .body .more .buttons .favourite.active svg {
+  fill: #f5d91d;
+}
+#apply_now {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+button#apply_now:hover {
+  border: 1px solid #f5d91d !important;
+}
+.navbar-collapse {
+  top: 100% !important;
+}
+a[disabled],
+a[disabled]:hover {
+  pointer-events: none;
+  background-color: #fff !important;
+}
+.header-other {
+  background: none !important;
+}
+.alice-bg {
+  background: none !important;
+  box-shadow: none !important;
+}
 
-        .job-cat-search-b-y {
-            border-radius:25px !important;
-            border-radius: 25px !important;
-            padding-left: 10px;
-            padding-right: 10px;
-            border-right: 1px solid #f5d91d !important;
-            outline: none !important;
-            }
+.job-cat-search-b-y {
+  border-radius: 25px !important;
+  border-radius: 25px !important;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #f5d91d !important;
+  outline: none !important;
+}
 
-   
+/* Editing Start */
+.banner-4-bg {
+  z-index: -1;
+}
+/* Editing End */
