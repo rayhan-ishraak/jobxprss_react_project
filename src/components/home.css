@@ -122,8 +122,26 @@
             border-radius: 25px !important;
             padding-left: 10px;
             padding-right: 10px;
-            border-right: 1px solid #f5d91d !important;
+            border-right: 1px solid #f5d91d;
             outline: none !important;
+            
             }
 
-   
+            .banner-4-bg {
+                z-index: -1;
+            }
+            .nav-link{
+                color:#212529
+            }
+            /* .fixed-navbar
+            {
+                position: fixed;
+            } */
+        /* .bg-yellow.pt-1.d-none.d-md-block{
+            position: fixed;
+
+        } */
+
+        /* editing start */
+
+        /* editing end */
