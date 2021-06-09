@@ -63,6 +63,8 @@
 }
 .banner-search button {
   padding: 0 !important;
+  position: absolute;
+  right: 0px;
 }
 
 .featured-company-list {
@@ -124,11 +126,50 @@ a[disabled]:hover {
   padding-left: 10px;
   padding-right: 10px;
   border-right: 1px solid #f5d91d !important;
+
   outline: none !important;
 }
 
 /* Editing Start */
+.nav-link {
+  color: #212529;
+}
 .banner-4-bg {
   z-index: -1;
+}
+
+.feat-jobs-0 {
+  background-color: #fbfbfb !important;
+}
+
+.feat-jobs-1 {
+  background-color: #fff !important;
+}
+
+.career-advice-h3 {
+  max-height: 75px !important;
+  min-height: 75px !important;
+}
+
+.career-advice-paragraph {
+  max-height: 97px !important;
+  min-height: 97px !important;
+}
+
+.job-details-btn {
+  min-width: 115px;
+}
+
+.more > p {
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.apply-dealine-0 {
+  font-style: italic !important;
+}
+
+.deadline-0 {
+  font-style: italic;
 }
 /* Editing End */

@@ -1,9 +1,87 @@
 import React,{useEffect,useState} from 'react';
 import {Helmet} from "react-helmet"
+import CareerAdvice from './CareerAdvice';
 import FeaturedCompanies from './FeaturedCompanies';
+import FeaturedJobs from './FeaturedJobs'
 import "./home.css"
+import TrendingKeywords from './TrendingKeywords';
+import { useSelector } from "react-redux";
+//import CountUp from 'react-countup';
+import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
+import classnames from 'classnames';
+// Rayhan 
+import axios from 'axios';
 
-const home=(props)=>{
+const Home=(props)=>{
+    // Rayhan part Start
+
+    const apiCall=true
+    const [topCategories,setTopCategories]=useState([]);
+    const [topSkills,setTopSkills]=useState([]);
+    const [topCompanies,setTopCompanies]=useState([]);
+    const [topIndustries,setTopIndustries]=useState([]);
+     const [activeTab, setActiveTab] = useState('1');
+     const [searchCategory,setSearchCategory]=useState("");
+    //const [fixedNav,setFixedNav]=useState(false);
+
+    const toggle = tab => {
+        if(activeTab !== tab) 
+        {setActiveTab(tab)
+            setSearchCategory("");
+        };
+    }
+    const handleSearchCategory=(e)=>
+    {
+        setSearchCategory(e.target.value);
+    }
+    useEffect(()=>{
+        axios.get("https://api.jobxprss.com/api/job/top-categories").then(res=>{
+            setTopCategories(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    ,[apiCall])
+    useEffect(()=>{
+        axios.get("https://api.jobxprss.com/api/job/top-skills").then(res=>{
+        setTopSkills(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    ,[apiCall])
+    useEffect(()=>{
+        axios.get("https://api.jobxprss.com/api/job/top-companies").then(res=>{
+        setTopCompanies(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    ,[apiCall])
+    useEffect(()=>{
+        axios.get("https://api.jobxprss.com/api/job/top-industries").then(res=>{
+        setTopIndustries(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    ,[apiCall])
+
+
+    // Rayhan part end
+
+    const vitalStats = useSelector(state => state.vitalStats)
+
+    //const [openJobs,setopenJobs] = useState(vitalStats.open_job)
+
+    //useEffect(() => {
+       //setopenJobs(vitalStats.open_job)
+    //}, [vitalStats.open_job])
+
+    const openJobs = vitalStats.open_job
+    const vacancy = vitalStats.num_of_vacancy
+    const companies = vitalStats.company_count
+    const skills = vitalStats.skill_count
  
     const subtitle="hello"
     return(
@@ -53,6 +131,7 @@ const home=(props)=>{
     <link rel="apple-touch-icon" href="https://d1fagfwe7y4ow4.cloudfront.net/images/favicon-57.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="https://d1fagfwe7y4ow4.cloudfront.net/images/favicon-72.png"/>
     <link rel="apple-touch-icon" sizes="114x114" href="https://d1fagfwe7y4ow4.cloudfront.net/images/favicon-114.png"/>
+    {/* eslint-disable-next-line */}
     <img height="1" width="1" src="https://www.facebook.com/tr?id=1066313170498816&ev=PageView&noscript=1"/>
 
 </Helmet>
@@ -92,7 +171,7 @@ const home=(props)=>{
             </div>
         </div>
     </nav> */}
-    <div class="bg-yellow pt-1 d-none d-md-block">
+    {/* <div class="bg-yellow pt-1 d-none d-md-block">
         <div class="container">
             <div class="row">
                 <div class="nav col">
@@ -100,17 +179,38 @@ const home=(props)=>{
                     <a href="tel:+01953306969" class="nav-link phone-number"><span class="fas fa-phone-alt text-dark mr-1"></span></a>
                 </div>
                 <div class="nav col-auto pull-right">
-                    <a class="nav-link facebook-url" style={{display: "none"}} target="_blank"><span class="fab fa-facebook-square"></span></a>
-                    <a class="nav-link linkedin-url" style={{display: "none"}} target="_blank"><span class="fab fa-linkedin"></span></a>
+                    <a class="nav-link facebook-url" style={{ paddingTop: '5px' }, { fontSize: '1.75rem'}} target="_blank"><span class="fab fa-facebook-square"></span></a>
+                    <a class="nav-link linkedin-url" style={{ paddingTop: '5px' }, { fontSize: '1.75rem'}} target="_blank"><span class="fab fa-linkedin"></span></a>
                     <a class="nav-link twitter-url" style={{display: "none"}} target="_blank"><span class="fab fa-twitter-square"></span></a>
                 </div>
             </div>
         </div>
+    </div> */}
+    <div className="sticky-top"> 
+    <div className="bg-yellow pt-1 d-none d-md-block">
+        <div className="container">
+            <div className="row">
+                <div className="nav col">
+                    <a href="https://jobxprss.com/cdn-cgi/l/email-protection.html#e19684838c8092958493a18499808c918d84cf828e8c" className="nav-link admin-email"><span className="fas fa-envelope text-dark mr-1"></span> info@jobxprss.com</a>
+                    <a href="tel:+01953306969" className="nav-link phone-number"><span className="fas fa-phone-alt text-dark mr-1"></span> 01609500001</a>
+                </div>
+                <div className="nav col-auto pull-right">
+                    {/* eslint-disable-next-line */}
+                    <a className="nav-link facebook-url" style={{ paddingTop: '5px' }, { fontSize: '1.75rem'}} target="_blank"><span className="fab fa-facebook-square"></span></a>
+                    {/* eslint-disable-next-line */}
+                    <a className="nav-link linkedin-url" style={{ paddingTop: '5px' }, { fontSize: '1.75rem'}} target="_blank"><span className="fab fa-linkedin"></span></a>
+                    {/* eslint-disable-next-line */}
+                    <a className="nav-link twitter-url" style={{display: "none"}} target="_blank"><span className="fab fa-twitter-square"></span></a>
+                </div>
+            </div>
+        </div>
     </div>
+    </div>
+
     <div class="container my-4 d-none d-md-block">
         <div class="row">
             <div class="col">
-                <a href="https://jobxprss.com/index.html">
+                <a href="https://jobxprss.com/">
                     <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/logo.png" class="img-fluid logo" alt=""/>
                 </a>
             </div>
@@ -119,20 +219,20 @@ const home=(props)=>{
                     
                         <li class="nav-item active"><a class="nav-link" href="https://jobxprss.com/index.html#">Home</a></li>
                     
-                    <li class="nav-item"><a class="nav-link" href="https://jobxprss.com/jobs/index.html" >Jobs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://jobxprss.com/career-advice.html">Career Advice</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://jobxprss.com/about-us.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://jobxprss.com/contact-us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://jobxprss.com/jobs/" >Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://jobxprss.com/career-advice/">Career Advice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://jobxprss.com/about-us/">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://jobxprss.com/contact-us/">Contact Us</a></li>
                     <div class="nav-item dropdown-sign-in">
                         <button class="dropdown-sign-in-btn">Sign In
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-sign-in-content">
-                                <a id="sign-in" href="https://jobxprss.com/professional/sign-in.html">As Professional</a>
-                                <a id="company_sign" href="https://jobxprss.com/company/sign-in.html">As Company</a>
+                                <a id="sign-in" href="https://jobxprss.com/professional/sign-in/">As Professional</a>
+                                <a id="company_sign" href="https://jobxprss.com/company/sign-in/">As Company</a>
                         </div>
                     </div>
-                    <li class="nav-item login-popup" id="register"><a class="nav-link" href="https://jobxprss.com/professional/signup/index.html">Sign Up</a></li>
+                    <li class="nav-item login-popup" id="register"><a class="nav-link" href="https://jobxprss.com/professional/signup/">Sign Up</a></li>
                 </ul>
             </div>
         </div>
@@ -143,7 +243,7 @@ const home=(props)=>{
                 <div class="col-12">
                     <div class="banner-content">
                         <h1>All the Great Jobs in One Place!</h1>
-                        <p> Find Jobs, Employment & Career Opportunities</p>
+                        {/* <p> Find Jobs, Employment & Career Opportunities</p> */}
                         
                         <div class="banner-search">
                             <form action="https://jobxprss.com/index.html" id="search-form" class="search-form" method="" novalidate="novalidate" autocomplete="off"><input type="hidden" name="csrfmiddlewaretoken" value="fPn2UFF9jSOMJKUerx3nwW7Qm7H15apiW8kOvHX7ikVOarc1YcOd1qFW0lMvUngN"/>
@@ -154,7 +254,9 @@ const home=(props)=>{
                                 <div class="error-msg-location " style={{"text-align": "left", display: "none"}}><span class="noti-arrow-search"></span></div>
                             </form>
                             <div class="trending-key">
-                                <div id="trend-keywords"><b>Trending Keywords:</b></div>
+                                <div id="trend-keywords"><b>Trending Keywords:</b>
+                                    <TrendingKeywords />
+                                </div>
                             </div>
                         </div>
                 
@@ -166,7 +268,7 @@ const home=(props)=>{
                                     </div>
                                     <div class="col-8 col-jx-12 p-remove fact-cont-wrap">
                                         <span class="fact-name">Open Jobs</span>
-                                        <h3 class="fact-number open-job-timer" id="job_counts" style={{display: "none"}}><span class="count" data-form="" data-to=""></span></h3>
+                                        <h3 class="fact-number open-job-timer" id="job_counts" styles={{display: "none"}}><span className="count" data-form="" data-to="">{openJobs}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +279,7 @@ const home=(props)=>{
                                     </div>
                                     <div class="col-8 col-jx-12 p-remove fact-cont-wrap">
                                         <span class="fact-name">Vacancies</span>
-                                        <h3 class="fact-number vacancy-timer" id="vacancy_count" style={{display: "none"}}><span class="count" data-form="" data-to=""></span></h3>
+                                        <h3 class="fact-number vacancy-timer" id="vacancy_count" styles={{display: "none"}}><span className="count" data-form="" data-to="">{vacancy}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +290,7 @@ const home=(props)=>{
                                     </div>
                                     <div class="col-8 col-jx-12 p-remove fact-cont-wrap">
                                         <span class="fact-name">Skills</span>
-                                        <h3 class="fact-number skill-timer" id="skill_count" style={{display: "none"}}><span class="count" data-form="" data-to=""></span></h3>
+                                        <h3 class="fact-number skill-timer" id="skill_count" styles={{display: "none"}}><span class="count" data-form="" data-to="">{skills}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +301,7 @@ const home=(props)=>{
                                     </div>
                                     <div class="col-8 col-jx-12 p-remove fact-cont-wrap">
                                         <span class="fact-name">Companies</span>
-                                        <h3 class="fact-number company-timer" id="companies_count" style={{display: "none"}}><span class="count"></span></h3>
+                                        <h3 class="fact-number company-timer" id="companies_count" styles={{display: "none"}}><span class="count">{companies}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -231,7 +333,7 @@ const home=(props)=>{
         </div>
     </div> */}
 
-    <div class="explore-job-wrapper">
+    {/* <div class="explore-job-wrapper">
         <div class="container categories-list">
             <div class="row">
                 <div class="col-xl-8 col-lg-12 col-md-12">
@@ -351,7 +453,203 @@ const home=(props)=>{
            
             </div>
         </div>
+    </div> */}
+
+    {/* Rayhan Start */}
+    <div className="explore-job-wrapper">
+        <div className="container categories-list">
+            <div className="row">
+                <div className="col-xl-8 col-lg-12 col-md-12">
+                    {/* <ul id="job-cat-list" className="nav cate-tab nav-tabs" role="tablist" id="myTab">
+                        <li className="nav-item"><a className="nav-link active" id="jxcategories-tab" data-toggle="tab" href="https://jobxprss.com/index.html#jxcategories" role="tab" aria-controls="jxcategories" aria-selected="true">
+                            <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/icons/category.svg" style={{"padding-right": "10px"}} alt=""/>CATEGORIES</a></li>
+                        <li className="nav-item"><a className="nav-link" id="jxskills-tab" data-toggle="tab" href="https://jobxprss.com/index.html#jxskills" role="tab" aria-controls="jxskills" aria-selected="true">
+                            <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/icons/pencil.svg" style={{"padding-right": "10px"}} alt=""/> SKILLS</a></li>
+                        <li className="nav-item"><a className="nav-link" id="jxcompanies-tab" data-toggle="tab" href="https://jobxprss.com/index.html#jxcompanies" role="tab" aria-controls="jxcompanies" aria-selected="true">
+                            <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/icons/office-building.svg" style={{"padding-right": "10px"}} alt=""/>COMPANIES</a></li>
+                        <li className="nav-item"><a className="nav-link" id="jxindustries-tab" data-toggle="tab" href="https://jobxprss.com/index.html#jxindustries" role="tab" aria-controls="jxindustries" aria-selected="true">
+                            <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/icons/industry.svg" style={{"padding-right": "10px"}} alt=""/>INDUSTRIES</a></li>
+                    </ul> */}
+                    <Nav tabs id="job-cat-list" className="nav cate-tab nav-tabs" >
+        <NavItem className="nav-item">
+          <NavLink
+            className={classnames({ active: activeTab === '1' })}
+            onClick={() => { toggle('1'); }}
+          >
+              <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/icons/category.svg" style={{"padding-right": "10px"}} alt=""/>CATEGORIES
+            
+          </NavLink>
+        </NavItem>
+        <NavItem className="nav-item">
+          <NavLink
+            className={classnames({ active: activeTab === '2' })}
+            onClick={() => { toggle('2'); }}
+          >
+            <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/icons/pencil.svg" style={{"padding-right": "10px"}} alt=""/> SKILLS
+          </NavLink>
+        </NavItem>
+        <NavItem className="nav-item">
+          <NavLink
+            className={classnames({ active: activeTab === '3' })}
+            onClick={() => { toggle('3'); }}
+          >
+            <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/icons/office-building.svg" style={{"padding-right": "10px"}} alt=""/>COMPANIES
+          </NavLink>
+        </NavItem>
+      <NavItem className="nav-item">
+      <NavLink
+        className={classnames({ active: activeTab === '4' })}
+        onClick={() => { toggle('4'); }}
+      >
+        <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/icons/industry.svg" style={{"padding-right": "10px"}} alt=""/>INDUSTRIES
+      </NavLink>
+    </NavItem>
+      </Nav>
+
+                    
+                    <div className="tab-content y-border" id="myTabContent">
+                    <TabContent activeTab={activeTab}>
+                    
+                        {/* <div id="jxcategories" className="container tab-pane active" role="tabpanel" aria-labelledby="jxcategories-tab"> */}
+                        <TabPane tabId="1" id="jxcategories" class="container tab-pane active">
+                            <div className="jx-tab-job-sort input-group d-flex align-items-center justify-content-center">
+                                 <input type="text" name="category" id="search-categories" placeholder="Search Job category" className="job-cat-search-b-y"  onChange={handleSearchCategory} />
+                            </div>
+                            <div className="row no-gutter px-3">
+                                <div className="col-md-12">
+                                    <ul id="category-list">
+                                    {topCategories.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).map(category=><div key={category.name}> <li>
+                                        <a title={category.name} class="list-group-item padding-border-l-r justify-content-between align-items-center"
+                                         data-category={category.name} 
+                                         href={`https://jobxprss.com/jobs?category=${category.name}`}>
+                                             {category.name}
+                                             <span class="badge badge-primary badge-primary-c badge-pill">
+                                                 {category.num_posts}</span></a></li></div>)}
+   
+                                    </ul>
+                                </div>
+                            </div>
+                        </TabPane>
+                        {/* </div> */}
+
+                    
+                        {/* <div id="jxskills" className="container tab-pane" role="tabpanel" aria-labelledby="jxskills-tab"> */}
+                        <TabPane tabId="2" id="jxskills" className="container tab-pane">
+                            <div className="jx-tab-job-sort input-group d-flex align-items-center justify-content-center">
+                                <input type="text" name="skill" id="search-skills" placeholder="Search Skills" className="job-cat-search-b-y"  onChange={handleSearchCategory}/>
+                            </div>
+                            <div className="row no-gutter px-3">
+                                <div className="col-md-12">
+                                    <ul id="skill-list">
+                                                 {topSkills.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).map(category=><div key={category.name}> <li>
+                                        <a title={category.name} class="list-group-item padding-border-l-r justify-content-between align-items-center"
+                                         data-category={category.name} 
+                                         href={`https://jobxprss.com/jobs?skill=${category.name}`}>
+                                             {category.name}
+                                             <span class="badge badge-primary badge-primary-c badge-pill">
+                                                 {category.skills_count}</span></a></li></div>)}
+                                                 
+                                                 
+                                    </ul>
+                                </div>
+                            </div>
+                            </TabPane>
+                        {/* </div> */}
+
+                       
+                        {/* <div id="jxcompanies" className="container tab-pane" role="tabpanel" aria-labelledby="jxcompanies-tab"> */}
+                        <TabPane tabId="3" id="jxcompanies" className="container tab-pane">
+                            <div className="jx-tab-job-sort input-group d-flex align-items-center justify-content-center">
+                                 <input type="text" name="company" id="search-companies" placeholder="Search Companies" className="job-cat-search-b-y"  onChange={handleSearchCategory} />
+                            </div>
+                            <div className="row no-gutter px-3">
+                                <div className="col-md-12">
+                                    <ul id="company-list">
+                                        {topCompanies.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).map(category=><div key={category.name}> <li>
+                                        <a title={category.name} class="list-group-item padding-border-l-r justify-content-between align-items-center"
+                                         data-category={category.name} 
+                                         href={`https://jobxprss.com/company-details/${category.name}`}>
+                                             {category.name}
+                                             <span class="badge badge-primary badge-primary-c badge-pill">
+                                                 {category.num_posts}</span></a></li></div>)}
+                                    </ul>
+                                </div>
+                            </div>
+                            </TabPane>
+                        {/* </div> */}
+
+        
+                        {/* <div id="jxindustries" className="container tab-pane" role="tabpanel" aria-labelledby="jxindustries-tab"> */}
+                        <TabPane tabId="4" id="jxindustries" className="container tab-pane">
+                            <div className="jx-tab-job-sort input-group d-flex align-items-center justify-content-center">
+                                 <input type="text" name="industry" id="search-industries" placeholder="Search Industries" className="job-cat-search-b-y"  onChange={handleSearchCategory}/>
+                            </div>
+                            <div className="row no-gutter px-3">
+                                <div className="col-md-12">
+                                    <ul id="industry-list">
+                                        {topIndustries.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).map(category=><div key={category.name}> <li>
+                                        <a title={category.name} class="list-group-item padding-border-l-r justify-content-between align-items-center"
+                                         data-category={category.name} 
+                                         href={`https://jobxprss.com/company-details/${category.name}`}>
+                                             {category.name}
+                                             <span class="badge badge-primary badge-primary-c badge-pill">
+                                                 {category.num_posts}</span></a></li></div>)}
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+                        {/* </div> */}
+                        </TabPane>
+                        </TabContent>
+                    </div>
+                </div>
+            
+                {/* <div className="col-xl-4 col-lg-12 col-md-12 jx-advertisements-wrap">
+                    <ul className="jx-advertisements">
+                        <li className="jx-advert-wrap">
+                            <img className="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/advertisement/ad-200x145-s.png" alt=""/>
+                        </li>
+                        <li className="jx-advert-wrap">
+                            <img className="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/advertisement/ad-320x145-m.png" alt=""/>
+                        </li>
+                        <li className="jx-advert-wrap">
+                            <img className="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/advertisement/ad-535x140-l.png" alt=""/>
+                        </li>
+                        <li className="jx-advert-wrap">
+                            <img className="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/advertisement/ad-170x135-xs.png" alt=""/>
+                        </li>
+                        <li className="jx-advert-wrap">
+                            <img className="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/advertisement/ad-170x135-xs_fi.png" alt=""/>
+                        </li>
+                        <li className="jx-advert-wrap">
+                            <img className="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/advertisement/ad-170x135-xs_fj.png" alt=""/>
+                        </li>
+                        <li className="jx-advert-wrap">
+                            <img className="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/advertisement/ad-200x145-s.png" alt=""/>
+                        </li>
+                        <li className="jx-advert-wrap">
+                            <img className="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/advertisement/ad-320x145-m.png" alt=""/>
+                        </li>
+                    </ul>
+                </div>  */}
+{/*                
+                <div className="col-xl-4 col-lg-12 col-md-12">
+                    <div id="jxAdvertSlide" className="carousel slide jx-home-ads-slide" data-ride="carousel">
+                        <ol id="slider-serial" className="carousel-indicators">
+                        </ol>
+                        <div id="slider-advert" className="carousel-inner">
+                            <div className="carousel-item active">
+                                <img className="d-block w-100" src="/static/images/home-ads-slider/jx-slider-1.jpg" alt="First slide"/>
+                           </div>
+                        </div>
+                    </div>
+                </div> */}
+           
+            </div>
+        </div>
     </div>
+
+    {/* Rayhan End */}
   
     <div class="recent-job ash-background">
         <div class="container">
@@ -360,8 +658,9 @@ const home=(props)=>{
                 <span class="m-auto recent-bottom-border">&nbsp;</span>
             </div>
             <div class="row" id="jobs">
-                <div class="col" id="job-list">
-                    <div class="apply-popup">
+                 <div class="col" id="job-list">
+                     <FeaturedJobs />
+                    {/* <div class="apply-popup">
                         <div class="modal fade" id="apply-popup-id" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -404,8 +703,8 @@ const home=(props)=>{
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> */}
+                </div> 
             </div>
             <div class="text-center browse-all-padding">
                 <a href="https://jobxprss.com/featured-jobs/index.html" class="button btn-yellow d-inline-block browse-all-btn">Browse All</a>
@@ -439,9 +738,9 @@ const home=(props)=>{
                     </div>
                 </div>
             </div>
-            <div class="row" id="career-advice">
-
-            </div>
+            {/* <div class="row" id="career-advice"> */}
+                <CareerAdvice />
+            {/* </div> */}
             <div class=" browse-all-career-advise" style={{"text-align": "center","padding-top":"50px"}}>
                 <a href="https://jobxprss.com/career-advice.html" class="button btn-yellow d-inline-block browse-all-btn">Browse All</a>
             </div>
@@ -464,10 +763,14 @@ const home=(props)=>{
                     <span class="bottom-border-app-link"></span>
                     <p class="text-center">To get the best JobXprss experience, use the mobile app.Available for both Android & iOS.</p>
                     <div class="app-download-button">
+                        {/* eslint-disable-next-line */}
                         <div class="jx-app-dl-btn-a"><a href="https://jobxprss.com/android.html" target="_blank" class="android-app">
+                            {/* eslint-disable-next-line */}
                             <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/badge-android.png" alt="Some picture"/>
                         </a></div>&nbsp;&nbsp;
+                        {/* eslint-disable-next-line */}
                         <div class="jx-app-dl-btn-i"><a href="https://jobxprss.com/ios.html" target="_blank" class="apple-app">
+                            {/* eslint-disable-next-line */}
                             <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/badge-iphone.png" alt="Some picture"/>
                         </a></div>
                     </div>
@@ -485,6 +788,7 @@ const home=(props)=>{
                 </div>
             </div>
             <div class="col-md app_image">
+                {/* eslint-disable-next-line */}
                 <img  class="img-fluid" src="https://d1fagfwe7y4ow4.cloudfront.net/images/yellow/jobxprss_app.png"/>
             </div>
         </div>
@@ -503,8 +807,11 @@ const home=(props)=>{
                 </div>
                 <div class="col-md-6">
                     <div class="footer-social">
+                        {/* eslint-disable-next-line */}
                         <a class="facebook-url" style={{display: "none"}} href="https://jobxprss.com/index.html#" target="_blank"><i class="fab fa-3x fa-facebook-square text-yellow"></i></a>&nbsp;
+                        {/* eslint-disable-next-line */}
                         <a class="linkedin-url" style={{display: "none"}} href="https://jobxprss.com/index.html#" target="_blank"><i class="fab fa-3x fa-linkedin text-yellow"></i></a>&nbsp;
+                        {/* eslint-disable-next-line */}
                         <a class="twitter-url" style={{display: "none"}} href="https://jobxprss.com/index.html#" target="_blank"><i class="fab fa-3x fa-twitter-square text-yellow"></i></a>
                     </div>
                 </div>
@@ -597,12 +904,14 @@ const home=(props)=>{
             <div class="col-xl-8 col-lg-7  col-md-12 text-center" style={{"padding-top": "3px"}}>
                 <picture>
                     <source srcset="https://d1fagfwe7y4ow4.cloudfront.net/images/yellow/pay-with-logo-xs.png" media="(max-width: 575px)"/>
+                    {/* eslint-disable-next-line */}
                     <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/yellow/pay-with-logo.png" style={{"max-width": "100%", "text-align": "center"}}/>
                 </picture>
             </div>
             <div class="col-xl-3 col-lg-3  col-md-12">
                     <div class="verify-ssl-logo">
                         <p >Verified by</p>
+                        {/* eslint-disable-next-line */}
                         <img class="ssl-cmrs-img" src="https://d1fagfwe7y4ow4.cloudfront.net/images/yellow/ssl-commerse.png" style={{"max-width": "40%"}} />
                     </div>
             </div>
@@ -616,6 +925,7 @@ const home=(props)=>{
                     <div class="footer-bottom border-top">
                         <div class="row">
                             <div class="col-lg-3 col-md-12">
+                                {/* eslint-disable-next-line */}
                                 <p class="powered-by"><span>Powered By </span> <a class="powered-by-ishraak" target="_blank" href="http://www.ishraak.com">
                                     <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/ishraak-solutions-logo.png" alt="ISHRAAK" width="80px"/>
 
@@ -653,4 +963,4 @@ const home=(props)=>{
 
 }
 
-export default home;
+export default Home;
