@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react';
+// import { useHistory } from "react-router-dom";
 import {Helmet} from "react-helmet"
 import CareerAdvice from './CareerAdvice';
 import FeaturedCompanies from './FeaturedCompanies';
@@ -12,9 +13,11 @@ import classnames from 'classnames';
 // Rayhan 
 import axios from 'axios';
 
+
+
 const Home=(props)=>{
     // Rayhan part Start
-
+   
     const apiCall=true
     const [topCategories,setTopCategories]=useState([]);
     const [topSkills,setTopSkills]=useState([]);
@@ -22,50 +25,101 @@ const Home=(props)=>{
     const [topIndustries,setTopIndustries]=useState([]);
      const [activeTab, setActiveTab] = useState('1');
      const [searchCategory,setSearchCategory]=useState("");
+     const [searchWord,setSearchWord]=useState("")
     //const [fixedNav,setFixedNav]=useState(false);
+    const [loadJobs,setLoadJobs]=useState({
+        '1':true,
+        '2':false,
+        '3':false,
+        '4':false})
+    
 
     const toggle = tab => {
-        if(activeTab !== tab) 
-        {setActiveTab(tab)
-            setSearchCategory("");
-        };
+        if(activeTab !== tab){
+            switch(tab){
+                case '2':
+                    if(loadJobs['2']===false)
+                    {
+                        axios.get("https://api.jobxprss.com/api/job/top-skills/").then(res=>{
+                            setTopSkills(res.data)
+                            }).catch(err=>{
+                                console.log(err)
+                            })
+                            setLoadJobs((prevState)=>({...prevState,"2":true}))    
+                    }
+                    break;
+                case '3':
+                    if(loadJobs['3']===false)
+                    {
+                        axios.get("https://api.jobxprss.com/api/job/top-companies/").then(res=>{
+                            setTopCompanies(res.data)
+                            }).catch(err=>{
+                                console.log(err)
+                            })
+                            setLoadJobs((prevState)=>({...prevState,"3":true}))     
+                    }
+                    break;
+                case '4':
+                    if(loadJobs['4']===false)
+                    {
+                    axios.get("https://api.jobxprss.com/api/job/top-industries/").then(res=>{
+                        setTopIndustries(res.data)
+                        }).catch(err=>{
+                        console.log(err)
+                        })
+                        setLoadJobs((prevState)=>({...prevState,"4":true}))   
+                    }
+                    break;
+                default:
+                    break;
+
+            } 
+        setActiveTab(tab)
+        setSearchCategory("");
+        
+    }
     }
     const handleSearchCategory=(e)=>
     {
         setSearchCategory(e.target.value);
     }
+    const handleSearchWord=(e)=>
+    {
+        setSearchWord(e.target.value);
+    }
+
     useEffect(()=>{
-        axios.get("https://api.jobxprss.com/api/job/top-categories").then(res=>{
+        axios.get("https://api.jobxprss.com/api/job/top-categories/").then(res=>{
             setTopCategories(res.data)
         }).catch(err=>{
             console.log(err)
         })
     }
     ,[apiCall])
-    useEffect(()=>{
-        axios.get("https://api.jobxprss.com/api/job/top-skills").then(res=>{
-        setTopSkills(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-    ,[apiCall])
-    useEffect(()=>{
-        axios.get("https://api.jobxprss.com/api/job/top-companies").then(res=>{
-        setTopCompanies(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-    ,[apiCall])
-    useEffect(()=>{
-        axios.get("https://api.jobxprss.com/api/job/top-industries").then(res=>{
-        setTopIndustries(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-    ,[apiCall])
+    // useEffect(()=>{
+    //     axios.get("https://api.jobxprss.com/api/job/top-skills").then(res=>{
+    //     setTopSkills(res.data)
+    //     }).catch(err=>{
+    //         console.log(err)
+    //     })
+    // }
+    // ,[apiCall])
+    // useEffect(()=>{
+    //     axios.get("https://api.jobxprss.com/api/job/top-companies").then(res=>{
+    //     setTopCompanies(res.data)
+    //     }).catch(err=>{
+    //         console.log(err)
+    //     })
+    // }
+    // ,[apiCall])
+    // useEffect(()=>{
+    //     axios.get("https://api.jobxprss.com/api/job/top-industries").then(res=>{
+    //     setTopIndustries(res.data)
+    //     }).catch(err=>{
+    //         console.log(err)
+    //     })
+    // }
+    // ,[apiCall])
 
 
     // Rayhan part end
@@ -209,12 +263,12 @@ const Home=(props)=>{
 
     <div class="container my-4 d-none d-md-block">
         <div class="row">
-            <div class="col">
+            <div class="col" style={{zIndex:1}}>
                 <a href="https://jobxprss.com/">
                     <img src="https://d1fagfwe7y4ow4.cloudfront.net/images/logo.png" class="img-fluid logo" alt=""/>
                 </a>
             </div>
-            <div class="col-auto">
+            <div class="col-auto" style={{zIndex:1}} >
                 <ul class="nav top-links">
                     
                         <li class="nav-item active"><a class="nav-link" href="https://jobxprss.com/index.html#">Home</a></li>
@@ -246,10 +300,12 @@ const Home=(props)=>{
                         {/* <p> Find Jobs, Employment & Career Opportunities</p> */}
                         
                         <div class="banner-search">
-                            <form action="https://jobxprss.com/index.html" id="search-form" class="search-form" method="" novalidate="novalidate" autocomplete="off"><input type="hidden" name="csrfmiddlewaretoken" value="fPn2UFF9jSOMJKUerx3nwW7Qm7H15apiW8kOvHX7ikVOarc1YcOd1qFW0lMvUngN"/>
-                                <div class="input-group search-bar">
-                                <input type="text" name="keyword" id="keyword" placeholder="Enter Keywords"/>
-                                <button class="button jxhome-search-btn primary-bg search-btn"><i class="fas fa-search text-dark" style={{color:"#ffffff"}}></i><span></span></button>
+                            <form action={`https://jobxprss.com/jobs/${searchWord}`} id="search-form" class="search-form" method="" novalidate="novalidate" autocomplete="off"> <input type="hidden" name="keyword" value={searchWord}></input><input type="hidden" name="csrfmiddlewaretoken" value="fPn2UFF9jSOMJKUerx3nwW7Qm7H15apiW8kOvHX7ikVOarc1YcOd1qFW0lMvUngN"></input>
+                            
+                                <div class="input-group">
+                                <input type="text" name="keyword" id="keyword" placeholder="Enter Keywords" onChange={handleSearchWord}/>
+                            
+                                <button class="button jxhome-search-btn primary-bg search-btn"><i class="fas fa-search text-dark" style={{color:"#ffffff"}}></i><span></span> SEARCH</button>
                                 </div>
                                 <div class="error-msg-location " style={{"text-align": "left", display: "none"}}><span class="noti-arrow-search"></span></div>
                             </form>
@@ -505,6 +561,7 @@ const Home=(props)=>{
       </NavLink>
     </NavItem>
       </Nav>
+      
 
                     
                     <div className="tab-content y-border" id="myTabContent">
@@ -518,11 +575,11 @@ const Home=(props)=>{
                             <div className="row no-gutter px-3">
                                 <div className="col-md-12">
                                     <ul id="category-list">
-                                    {topCategories.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).map(category=><div key={category.name}> <li>
+                                    {topCategories.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).slice(0,36).map(category=><div key={category.name}> <li>
                                         <a title={category.name} class="list-group-item padding-border-l-r justify-content-between align-items-center"
                                          data-category={category.name} 
                                          href={`https://jobxprss.com/jobs?category=${category.name}`}>
-                                             {category.name}
+                                             {category.name.length>22?category.name.substring(0,22).concat("..."):category.name}
                                              <span class="badge badge-primary badge-primary-c badge-pill">
                                                  {category.num_posts}</span></a></li></div>)}
    
@@ -541,11 +598,11 @@ const Home=(props)=>{
                             <div className="row no-gutter px-3">
                                 <div className="col-md-12">
                                     <ul id="skill-list">
-                                                 {topSkills.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).map(category=><div key={category.name}> <li>
+                                                 {topSkills.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).slice(0,36).map(category=><div key={category.name}> <li>
                                         <a title={category.name} class="list-group-item padding-border-l-r justify-content-between align-items-center"
                                          data-category={category.name} 
                                          href={`https://jobxprss.com/jobs?skill=${category.name}`}>
-                                             {category.name}
+                                             {category.name.length>22?category.name.substring(0,22).concat("..."):category.name}
                                              <span class="badge badge-primary badge-primary-c badge-pill">
                                                  {category.skills_count}</span></a></li></div>)}
                                                  
@@ -565,11 +622,11 @@ const Home=(props)=>{
                             <div className="row no-gutter px-3">
                                 <div className="col-md-12">
                                     <ul id="company-list">
-                                        {topCompanies.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).map(category=><div key={category.name}> <li>
+                                        {topCompanies.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).slice(0,36).map(category=><div key={category.name}> <li>
                                         <a title={category.name} class="list-group-item padding-border-l-r justify-content-between align-items-center"
                                          data-category={category.name} 
                                          href={`https://jobxprss.com/company-details/${category.name}`}>
-                                             {category.name}
+                                             {category.name.length>22?category.name.substring(0,22).concat("..."):category.name}
                                              <span class="badge badge-primary badge-primary-c badge-pill">
                                                  {category.num_posts}</span></a></li></div>)}
                                     </ul>
@@ -587,11 +644,11 @@ const Home=(props)=>{
                             <div className="row no-gutter px-3">
                                 <div className="col-md-12">
                                     <ul id="industry-list">
-                                        {topIndustries.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).map(category=><div key={category.name}> <li>
+                                        {topIndustries.filter(jobcategory => (jobcategory["name"].toLowerCase()).includes(searchCategory.toLowerCase())).slice(0,36).map(category=><div key={category.name}> <li>
                                         <a title={category.name} class="list-group-item padding-border-l-r justify-content-between align-items-center"
                                          data-category={category.name} 
                                          href={`https://jobxprss.com/company-details/${category.name}`}>
-                                             {category.name}
+                                             {category.name.length>22?category.name.substring(0,22).concat("..."):category.name}
                                              <span class="badge badge-primary badge-primary-c badge-pill">
                                                  {category.num_posts}</span></a></li></div>)}
                                     
